@@ -1,3 +1,7 @@
 Rails.application.routes.draw do
-  resources :bikes, :trains
+  get '/bike' => 'bike#show'
+
+  get '/train/:lat/:long' => 'train#show'
+
+  get '/bus/:lat/:long' => 'bus#show'
 end
