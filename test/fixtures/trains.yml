@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  arriving_at: MyString
+  line: MyString
+  destination: MyString
+  minutes: MyString
+  lat: 1.5
+  long: 1.5
+  distance: 1.5
+
+two:
+  arriving_at: MyString
+  line: MyString
+  destination: MyString
+  minutes: MyString
+  lat: 1.5
+  long: 1.5
+  distance: 1.5
