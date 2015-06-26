@@ -26,27 +26,28 @@ class Train < ActiveRecord::Base
       m.save!
     end
     asc_stations = Train.all.sort_by { |h| h[:distance] }
-    chosen_station = asc_stations.first
-    next_trains chosen_station
+    chosen_station = asc_stations.first[:station_code]
+    chosen_lat = asc_stations.first[:lat]
+    chosen_long = asc_stations.first[:long]
+    self.next_trains chosen_station, chosen_lat, chosen_long
   end
 
-  def self.next_trains chosen_station
-    code = chosen_station[:code]
-    predictions = HTTParty.get("https://api.wmata.com/StationPrediction.svc/json/GetPrediction/#{code}", query: {api_key: "#{Token}" })
+  def self.next_trains chosen_station, chosen_lat, chosen_long
+    predictions = HTTParty.get("https://api.wmata.com/StationPrediction.svc/json/GetPrediction/#{chosen_station}", query: {api_key: "#{Token}" })
     trains = predictions["Trains"] # Isolates the API into an array of train hashes
 
-    @results = []
+    results = []
     trains.each do |d|
       info = {
         arriving_at: d["LocationName"],
         line: d["Line"],
         destination: d["DestinationName"],
         minutes: d["Min"].to_i,
-        latitude: d["Lat"],
-        longitude: d["Lon"]
+        latitude: chosen_lat,
+        longitude: chosen_long
       }
-      @results.push info
+      results.push info
     end
-    return @results
+    @trains = results
   end
 end

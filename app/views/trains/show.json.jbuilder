@@ -1,8 +1,8 @@
-json.trains @results do |s|
-  json.arriving_at s["LocationName"]
-  json.line s["Line"]
-  json.destination s["DestinationName"]
-  json.minutes s["Min"].to_i
-  json.latitude s["Lat"].to_f
-  json.longitude s["Lon"].to_f
+json.trains @locate do |s|
+  json.arriving_at s[:arriving_at]
+  json.line s[:line]
+  json.destination s[:destination]
+  json.minutes s[:minutes].to_i
+  json.latitude s[:latitude].to_f
+  json.longitude s[:longitude].to_f
 end
