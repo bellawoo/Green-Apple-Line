@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  get '/bike' => 'bike#show'
+  get '/bike' => 'bikes#show'
 
-  get '/train/:lat/:long' => 'train#show'
+  get '/train' => 'trains#show'
 
   get '/bus/:lat/:long' => 'bus#show'
 end
