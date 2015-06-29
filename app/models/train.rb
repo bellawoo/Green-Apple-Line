@@ -36,7 +36,7 @@ class Train < ActiveRecord::Base
     predictions = HTTParty.get("https://api.wmata.com/StationPrediction.svc/json/GetPrediction/#{chosen_station}", query: {api_key: "#{Token}" })
     trains = predictions["Trains"] # Isolates the API into an array of train hashes
 
-    results = []
+    @trains = []
     trains.each do |d|
       info = {
         arriving_at: d["LocationName"],
@@ -46,8 +46,8 @@ class Train < ActiveRecord::Base
         latitude: chosen_lat,
         longitude: chosen_long
       }
-      results.push info
+      @trains.push info
     end
-    @trains = results
+    @trains
   end
 end
