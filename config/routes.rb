@@ -3,5 +3,5 @@ Rails.application.routes.draw do
 
   get '/train' => 'trains#show'
 
-  get '/bus/:lat/:long' => 'bus#show'
+  get '/bus' => 'bus#show'
 end
